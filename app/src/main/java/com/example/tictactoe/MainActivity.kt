@@ -6,150 +6,149 @@ import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.example.tictactoe.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-    enum class Turn{
+
+    enum class Turn {
         NOUGHT,
         CROSS
     }
+
     private var firstTurn = Turn.CROSS
     private var currentTurn = Turn.NOUGHT
 
     private var crossScore = 0
     private var noughtScore = 0
-    private var boardList = mutableListOf<Button>()
     private lateinit var binding: ActivityMainBinding
+    private val boardList = mutableListOf<Button>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-       initBoard()
+
+        initBoard()
+        setTurnLabel()
+        updateScore()
+
+       // Restart korar jonno
+        binding.restartButton.setOnClickListener {
+            resetScores()
+        }
+        val prefs = getSharedPreferences("tictactoe", MODE_PRIVATE)
+        prefs.edit().putInt("xScore", crossScore).apply()
+
     }
 
     private fun initBoard() {
-        boardList.add(binding.a1)
-        boardList.add(binding.a2)
-        boardList.add(binding.a3)
-        boardList.add(binding.b1)
-        boardList.add(binding.b2)
-        boardList.add(binding.b3)
-        boardList.add(binding.c1)
-        boardList.add(binding.c2)
-        boardList.add(binding.c3)
-        setTurnLable()
+        boardList.addAll(
+            listOf(
+                binding.a1, binding.a2, binding.a3,
+                binding.b1, binding.b2, binding.b3,
+                binding.c1, binding.c2, binding.c3
+            )
+        )
     }
 
     fun boardTapped(view: View) {
-        if (view !is Button)
-            return
+        if (view !is Button) return
         addToBoard(view)
-        if(chedkForVictory(NOUGHT)) {
+
+        if (checkForVictory(NOUGHT)) {
             noughtScore++
-            result ("Noughts Win!")
+            updateScore()
+            result("Player O Wins!")
             return
         }
-        if(chedkForVictory(CROSS)){
+
+        if (checkForVictory(CROSS)) {
             crossScore++
-            result ("Cross Win!")
+            updateScore()
+            result("Player X Wins!")
             return
         }
-        if(fullBoard()){
-            result("Draw")
+
+        if (fullBoard()) {
+            result("Draw!")
         }
     }
 
-    private fun chedkForVictory(s: String): Boolean {
-        //Horizontal Victory
-        if (match(binding.a1,s) && match(binding.a2,s)&& match(binding.a3,s))
-            return true
+    private fun checkForVictory(symbol: String): Boolean {
+        // Horizontal
+        if (match(binding.a1, symbol) && match(binding.a2, symbol) && match(binding.a3, symbol)) return true
+        if (match(binding.b1, symbol) && match(binding.b2, symbol) && match(binding.b3, symbol)) return true
+        if (match(binding.c1, symbol) && match(binding.c2, symbol) && match(binding.c3, symbol)) return true
 
-        if (match(binding.b1,s) && match(binding.b2,s)&& match(binding.b3,s))
-            return true
+        // Vertical
+        if (match(binding.a1, symbol) && match(binding.b1, symbol) && match(binding.c1, symbol)) return true
+        if (match(binding.a2, symbol) && match(binding.b2, symbol) && match(binding.c2, symbol)) return true
+        if (match(binding.a3, symbol) && match(binding.b3, symbol) && match(binding.c3, symbol)) return true
 
-        if (match(binding.c1,s) && match(binding.c2,s)&& match(binding.c3,s))
-            return true
+        // Diagonal
+        if (match(binding.a1, symbol) && match(binding.b2, symbol) && match(binding.c3, symbol)) return true
+        if (match(binding.a3, symbol) && match(binding.b2, symbol) && match(binding.c1, symbol)) return true
 
-        //Vertical Victory
-        if (match(binding.a1,s) && match(binding.b1,s)&& match(binding.c1,s))
-            return true
-
-        if (match(binding.a2,s) && match(binding.b2,s)&& match(binding.c2,s))
-            return true
-
-        if (match(binding.a3,s) && match(binding.b3,s)&& match(binding.c3,s))
-            return true
-
-        // Diogonal
-        if (match(binding.a1,s) && match(binding.b2,s)&& match(binding.c3,s))
-            return true
-
-        if (match(binding.a3,s) && match(binding.b2,s)&& match(binding.c1,s))
-            return true
         return false
     }
-    private fun match(button: Button, symbol : String) = button.text == symbol
+
+    private fun match(button: Button, symbol: String) = button.text == symbol
+
     private fun result(title: String) {
-        val message = "\nNoughts $noughtScore\n\n Crosses $crossScore"
         AlertDialog.Builder(this)
             .setTitle(title)
-            .setMessage(message)
-            .setPositiveButton("Reset"){
-                _,_ ->
-                resetBoard()
-            }
+            .setMessage("X: $crossScore  |  O: $noughtScore")
+            .setPositiveButton("Play Again") { _, _ -> resetBoard() }
             .setCancelable(false)
             .show()
     }
-    private fun resetBoard()
-    {
-        for(button in boardList){
-            button.text = ""
-        }
-        if(firstTurn ==Turn.NOUGHT)
-            firstTurn=Turn.CROSS
-        else if(firstTurn == Turn.CROSS)
-            firstTurn = Turn.NOUGHT
-        currentTurn = firstTurn
-        setTurnLable()
-    }
-    private fun fullBoard(): Boolean {
-        for (button in boardList){
-            if(button.text=="")
-                return false
-        }
-        return true
-    }
 
     private fun addToBoard(button: Button) {
-        if(button.text != "")
-            return
-        if (currentTurn == Turn.NOUGHT){
-            button.text = NOUGHT
+        if (button.text.isNotEmpty()) return
+
+        button.text = if (currentTurn == Turn.NOUGHT) {
             currentTurn = Turn.CROSS
-        }
-        else  if (currentTurn == Turn.CROSS){
-            button.text = CROSS
+            NOUGHT
+        } else {
             currentTurn = Turn.NOUGHT
+            CROSS
         }
-        setTurnLable()
+
+        setTurnLabel()
     }
 
-    private fun setTurnLable() {
+    private fun fullBoard(): Boolean = boardList.all { it.text.isNotEmpty() }
+
+    private fun resetBoard() {
+        for (button in boardList) button.text = ""
+        firstTurn = if (firstTurn == Turn.NOUGHT) Turn.CROSS else Turn.NOUGHT
+        currentTurn = firstTurn
+        setTurnLabel()
+    }
+
+    private fun resetScores() {
+        crossScore = 0
+        noughtScore = 0
+        resetBoard()
+        updateScore()
+    }
+
+    private fun updateScore() {
+        binding.playerXScoreTv.text = crossScore.toString()
+        binding.playerOScoreTv.text = noughtScore.toString()
+    }
+
+    private fun setTurnLabel() {
         val turnText = when (currentTurn) {
-            Turn.CROSS -> "Turn $CROSS"
-            Turn.NOUGHT -> "Turn $NOUGHT"
+            Turn.CROSS -> "Turn: X"
+            Turn.NOUGHT -> "Turn: O"
         }
         binding.turnTv.text = turnText
     }
 
-    companion object
-    {
+    companion object {
         const val NOUGHT = "O"
         const val CROSS = "X"
     }
-
 }
