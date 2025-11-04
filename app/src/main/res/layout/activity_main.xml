@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:background="#ECF0F1" tools:context=".MainActivity">
 
+
     <TextView
         android:id="@+id/turnTv"
         android:layout_width="wrap_content"
@@ -145,15 +146,31 @@
         android:id="@+id/restartButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Restart Game"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:textColor="@color/white"
+        android:layout_marginBottom="40dp"
+        android:backgroundTint="#2ECC71"
         android:paddingStart="30dp"
         android:paddingEnd="30dp"
-        android:backgroundTint="#2ECC71" app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:text="Restart Game"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="40dp"/>
+        app:layout_constraintHorizontal_bias="0.21"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/homeMain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Home"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:backgroundTint="#2ECC71"
+        android:layout_marginBottom="40dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/restartButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

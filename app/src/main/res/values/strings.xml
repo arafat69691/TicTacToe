@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">TicTacToe</string>
+    <string name="_1_tic_tac_toe_is_a_2_player_game_n_2_the_board_has_9_squares_3x3_grid_n_3_player_1_uses_x_and_player_2_uses_o_n_4_players_take_turns_marking_empty_squares_n_5_the_first_player_to_get_3_of_their_marks_in_a_row_horizontally_vertically_or_diagonally_wins_n_6_if_all_9_squares_are_filled_and_no_one_wins_the_game_is_a_draw">1️⃣ Tic Tac Toe is a 2-player game.\n 2️⃣ The board has 9 squares (3x3 grid).\n 3️⃣ Player 1 uses X and Player 2 uses O.\n 4️⃣ Players take turns marking empty squares.\n 5️⃣ The first player to get 3 of their marks in a row (horizontally, vertically, or diagonally) wins.\n 6️⃣ If all 9 squares are filled and no one wins, the game is a draw!</string>
 </resources>

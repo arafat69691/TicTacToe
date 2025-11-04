@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#121212"
+    android:padding="24dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="How to Play"
+            android:textColor="#FFFFFF"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="16dp" />
+
+
+        <TextView
+            android:id="@+id/tvInstructions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#E0E0E0"
+            android:textSize="16sp"
+            android:lineSpacingExtra="6dp"
+            android:text="@string/_1_tic_tac_toe_is_a_2_player_game_n_2_the_board_has_9_squares_3x3_grid_n_3_player_1_uses_x_and_player_2_uses_o_n_4_players_take_turns_marking_empty_squares_n_5_the_first_player_to_get_3_of_their_marks_in_a_row_horizontally_vertically_or_diagonally_wins_n_6_if_all_9_squares_are_filled_and_no_one_wins_the_game_is_a_draw" />
+
+
+        <Button
+            android:id="@+id/btnBack"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="Back to Home"
+            android:backgroundTint="#7EA7E9"
+            android:textColor="#000000"
+            android:layout_marginTop="32dp"/>
+    </LinearLayout>
+</LinearLayout>
