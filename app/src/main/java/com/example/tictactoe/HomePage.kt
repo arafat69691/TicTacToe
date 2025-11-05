@@ -24,6 +24,12 @@ class HomePage : AppCompatActivity() {
         binding.btnHowToPlay.setOnClickListener {
             startActivity(Intent(this, HowToPlay::class.java))
         }
+        binding.moreGame.setOnClickListener {
+            startActivity(Intent(this, CardBackGame::class.java))
+        }
+        binding.moreGame.setOnClickListener {
+            startActivity(Intent(this, CardBackGame::class.java))
+        }
         binding.btnExit.setOnClickListener {
             AlertDialog.Builder(this)
                 .setTitle("Exit Game")

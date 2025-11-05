@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TicTacToe">
         <activity
+            android:name=".CardBackGame"
+            android:exported="false" />
+        <activity
             android:name=".AnimationActivity"
             android:exported="false" />
         <activity

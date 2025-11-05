@@ -38,6 +38,7 @@ class MainActivity : AppCompatActivity() {
         binding.restartButton.setOnClickListener {
             resetScores()
         }
+
         val prefs = getSharedPreferences("tictactoe", MODE_PRIVATE)
         prefs.edit().putInt("xScore", crossScore).apply()
         binding.homeMain.setOnClickListener {
