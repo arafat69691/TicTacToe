@@ -1,7 +1,11 @@
 package com.example.tictactoe
 
 import android.content.Intent
+import android.graphics.Matrix
+import android.media.MediaPlayer
 import android.os.Bundle
+import android.view.Surface
+import android.view.TextureView
 import android.view.View
 import android.widget.Button
 import androidx.activity.enableEdgeToEdge
@@ -10,6 +14,11 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.tictactoe.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+
+
+
+
+
 
     enum class Turn {
         NOUGHT,
@@ -30,11 +39,14 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
+
         initBoard()
         setTurnLabel()
         updateScore()
 
-       // Restart korar jonno
+
+        // Restart korar jonno
         binding.restartButton.setOnClickListener {
             resetScores()
         }
@@ -45,6 +57,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, HomePage::class.java))
         }
     }
+
 
     private fun initBoard() {
         boardList.addAll(
@@ -124,12 +137,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun fullBoard(): Boolean = boardList.all { it.text.isNotEmpty() }
 
-    private fun resetBoard() {
-        for (button in boardList) button.text = ""
-        firstTurn = if (firstTurn == Turn.NOUGHT) Turn.CROSS else Turn.NOUGHT
-        currentTurn = firstTurn
-        setTurnLabel()
-    }
+
 
     private fun resetScores() {
         crossScore = 0
@@ -138,6 +146,12 @@ class MainActivity : AppCompatActivity() {
         updateScore()
     }
 
+    private fun resetBoard() {
+        for (button in boardList) button.text = ""
+        firstTurn = if (firstTurn == Turn.NOUGHT) Turn.CROSS else Turn.NOUGHT
+        currentTurn = firstTurn
+        setTurnLabel()
+    }
     private fun updateScore() {
         binding.playerXScoreTv.text = crossScore.toString()
         binding.playerOScoreTv.text = noughtScore.toString()

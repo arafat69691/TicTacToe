@@ -1,5 +1,6 @@
 package com.example.tictactoe
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.widget.GridLayout
@@ -10,9 +11,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.postDelayed
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.tictactoe.databinding.ActivityCardBackGameBinding
 
 
 class CardBackGame : AppCompatActivity() {
+    private lateinit var binding: ActivityCardBackGameBinding
     private lateinit var gridLayout: GridLayout
     private lateinit var scoreText: TextView
 
@@ -29,13 +32,19 @@ class CardBackGame : AppCompatActivity() {
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        binding = ActivityCardBackGameBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_card_back_game)
+        setContentView(binding.root)
 
         gridLayout = findViewById(R.id.gridLayout)
         scoreText = findViewById(R.id.scoreText)
 
+
         setupGame()
+
+        binding.bkButton.setOnClickListener {
+            startActivity(Intent(this, HomePage::class.java))
+        }
     }
 
     private fun setupGame() {

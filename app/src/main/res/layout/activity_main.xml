@@ -77,68 +77,73 @@
         android:layout_height="0dp"
         android:orientation="vertical"
         android:padding="20dp"
-        app:layout_constraintDimensionRatio="1:1" app:layout_constraintTop_toBottomOf="@id/scoreboardLayout"
         app:layout_constraintBottom_toTopOf="@id/restartButton"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintVertical_bias="0.5"
-        app:layout_constraintWidth_percent="0.8">
+       android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/scoreboardLayout"
+        >
 
-        <LinearLayout
-            style="@style/row">
+        <LinearLayout style="@style/row">
+
             <Button
                 android:id="@+id/a1"
-                style="@style/column"/>
-            <View
-                style="@style/verticalLine"/>
+                style="@style/column" />
+
+            <View style="@style/verticalLine" />
+
             <Button
                 android:id="@+id/a2"
-                style="@style/column"/>
-            <View
-                style="@style/verticalLine"/>
+                style="@style/column" />
+
+            <View style="@style/verticalLine" />
+
             <Button
                 android:id="@+id/a3"
-                style="@style/column"/>
+                style="@style/column" />
         </LinearLayout>
 
-        <View
-            style="@style/horizontalLine"/>
+        <View style="@style/horizontalLine" />
 
-        <LinearLayout
-            style="@style/row">
+        <LinearLayout style="@style/row">
+
             <Button
                 android:id="@+id/b1"
-                style="@style/column"/>
-            <View
-                style="@style/verticalLine"/>
+                style="@style/column" />
+
+            <View style="@style/verticalLine" />
+
             <Button
                 android:id="@+id/b2"
-                style="@style/column"/>
-            <View
-                style="@style/verticalLine"/>
+                style="@style/column" />
+
+            <View style="@style/verticalLine" />
+
             <Button
                 android:id="@+id/b3"
-                style="@style/column"/>
+                style="@style/column" />
         </LinearLayout>
 
-        <View
-            style="@style/horizontalLine"/>
+        <View style="@style/horizontalLine" />
 
-        <LinearLayout
-            style="@style/row">
+        <LinearLayout style="@style/row">
+
             <Button
                 android:id="@+id/c1"
-                style="@style/column"/>
-            <View
-                style="@style/verticalLine"/>
+                style="@style/column" />
+
+            <View style="@style/verticalLine" />
+
             <Button
                 android:id="@+id/c2"
-                style="@style/column"/>
-            <View
-                style="@style/verticalLine"/>
+                style="@style/column" />
+
+            <View style="@style/verticalLine" />
+
             <Button
                 android:id="@+id/c3"
-                style="@style/column"/>
+                style="@style/column" />
         </LinearLayout>
     </LinearLayout>
 
@@ -146,7 +151,7 @@
         android:id="@+id/restartButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="32dp"
         android:backgroundTint="#2ECC71"
         android:paddingStart="30dp"
         android:paddingEnd="30dp"
@@ -156,21 +161,41 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.21"
+        app:layout_constraintHorizontal_bias="0.193"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/homeMain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="#2ECC71"
         android:text="Home"
         android:textColor="@color/white"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:backgroundTint="#2ECC71"
-        android:layout_marginBottom="40dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/restartButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/restartButton" />
+
+    <Button
+        android:id="@+id/buttonPvP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="90dp"
+        android:text="Player vs Player"
+        app:layout_constraintEnd_toStartOf="@+id/buttonPvAI"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/turnTv" />
+
+    <Button
+        android:id="@+id/buttonPvAI"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Player vs AI"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonPvP"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/buttonPvP"
+        app:layout_constraintTop_toTopOf="@+id/buttonPvP" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
